@@ -2,7 +2,14 @@
 <html>
   <head>
       <meta charset="utf-8">
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet"> 
+
       <style>
+      h1, h2, h3, h4, h5, h6 {
+        font-family: "Roboto Slab", serif;
+      }
       body {
         font-family: "Helvetica Neue";
         font-weight: 300;
@@ -52,14 +59,17 @@
 
     <div id="heatmap"></div>
 
-    <!-- This is D3, our graphing library -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-      <!-- This is the tool tip -->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+    <!-- This is D3, our graphing library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+    <!-- This is the tool tip -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
 
     <!-- Now we include our actual visualization -->
-      <script src="walmart_heatmap.js"></script>
+    <script src="walmart_heatmap.js"></script>
 
   </body>
 </html>
