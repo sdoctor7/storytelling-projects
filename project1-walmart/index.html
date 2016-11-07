@@ -4,10 +4,28 @@
       <meta charset="utf-8">
 
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-      <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet"> 
+      <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>Project 1 - Walmart</title>
+
+      <!-- Bootstrap Core CSS -->
+      <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Theme CSS -->
+      <link href="../css/freelancer.min.css" rel="stylesheet">
+
+      <!-- Custom Fonts -->
+      <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"> 
 
       <style>
-      h1, h2, h3, h4, h5, h6 {
+      /*h1, h2, h3, h4, h5, h6 {
         font-family: "Roboto Slab", serif;
       }
       body {
@@ -17,7 +35,7 @@
         margin-right:auto;
         width:960px;
       }
-      svg { background: #f9f9f9; }
+      svg { background: #f9f9f9; }*/
 
       .axis path,
       .axis line {
@@ -40,27 +58,69 @@
         background: rgba(0, 0, 0, 0.8);
         color: #fff;
         border-radius: 2px;
-}
+      }
+
+      section{
+        margin-left:auto;
+        margin-right:auto;
+        width:960px;
+      }
       </style>
 
 
   </head>
-  <body>
-    <h1>Walmart Confusion Matrix</h1>
+  
+  <body id="page-top" class="index">
 
-    <p>Last weekend, I participated in a Data Science Hackathon.</p>
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">Storytelling Projects</a>
+            </div>
 
-    <p>The challenge was to use store and product data from Walmart to explore relationships between products. My team chose to explore the "next-best" product; in other words, what do customers buy when the product they want is unavailable?</p>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+<!--                     <li class="page-scroll">
+                        <a href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">About</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Contact</a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
 
-    <p>In order to answer this question, we trained a model to predict the most popular product at a given store on a given day, given information about the store and which products it has available.</p>
+    <section>
+      <h1>Walmart Confusion Matrix</h1>
 
-    <p>The idea is to utilize the model by changing a popular product's availability to zero and seeing how the model's prediction changes accordingly.</p>
+      <p>Last weekend, I participated in a Data Science Hackathon.</p>
 
-    <p>Shown here is the confusion matrix, or a heatmap showing the model's accuracy. On one axis is the true most popular product, and on the other is the model's prediction. You can see that our model, as it is now, is not very accurate!</p>
+      <p>The challenge was to use store and product data from Walmart to explore relationships between products. My team chose to explore the "next-best" product; in other words, what do customers buy when the product they want is unavailable?</p>
 
-    <p>We think this is because there are just a couple of very popular products overall, so the model is incentivized to guess those all the time. But we are going to work on improving it!</p>
+      <p>In order to answer this question, we trained a model to predict the most popular product at a given store on a given day, given information about the store and which products it has available.</p>
 
-    <div id="heatmap"></div>
+      <p>The idea is to utilize the model by changing a popular product's availability to zero and seeing how the model's prediction changes accordingly.</p>
+
+      <p>Shown here is the confusion matrix, or a heatmap showing the model's accuracy. On one axis is the true most popular product, and on the other is the model's prediction. You can see that our model, as it is now, is not very accurate!</p>
+
+      <p>We think this is because there are just a couple of very popular products overall, so the model is incentivized to guess those all the time. But we are going to work on improving it!</p>
+
+      <div id="heatmap"></div>
+    </section>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

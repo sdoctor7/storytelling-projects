@@ -86,7 +86,7 @@
       .attr("d", path)
       .style("stroke", "gray")
       .style("stroke-width", '1px')
-      .style('fill', 'white')
+      .style('fill', 'none')
   })
 
   d3.queue()
@@ -107,43 +107,20 @@
       .attr("y", function(d) {return projection([d.Longitude, d.Latitude])[1];})
       .attr('transform', 'translate(-6,-6)')
 
-    // svg.selectAll('circle').data(datapoints).enter().append('circle')
-    //   .attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('r', 6)
-    //   .attr("cx", function(d) {return projection([d.Longitude, d.Latitude])[0];})
-    //   .attr("cy", function(d) {return projection([d.Longitude, d.Latitude])[1];})
-
     var mySlider = $("#slider").slider({
       ticks: [1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016],
       ticks_labels: ["1980", "1984", "1988", "1992", "1996", "2000", "2004", "2008", "2012", "2016"],
       ticks_snap_bounds: 4
     });
 
-    // var value = mySlider.slider('getValue');
-
-    // d3.select('#slider').on('input', function() {update(+this.value)})
-
-    // $('#slider').slider()
-      mySlider.on('slide', function(d){
-        var value = mySlider.slider('getValue');
-        svg.selectAll("use")
-          // .transition(250) 
-          .attr('opacity', function(d) {
-            if (+d.year == +value) {return 1}
-            else {return 0}
-          })
-      });
-
-    // function update(year) {
-    //   d3.select("#slider-value").text(year);
-    //   d3.select("#slider").property("value", year);
-    //   svg.selectAll("use")
-    //     .transition(250) 
-    //     .attr('opacity', function(d) {
-    //     if (+d.year == +d3.select('#slider').property('value')) {return 1}
-    //     else {return 0}
-    //     })
-    // }
-
+    mySlider.on('slide', function(d){
+      var value = mySlider.slider('getValue');
+      svg.selectAll("use")
+        .attr('opacity', function(d) {
+          if (+d.year == +value) {return 1}
+          else {return 0}
+        })
+    });
 
   }
 
