@@ -6,6 +6,7 @@
 
       <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
       <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.3.0/css/bootstrap-slider.min.css">
 
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,35 +43,75 @@
         .slider {
           width: 100% !important;
         }
+        section{
+          margin-left:auto;
+          margin-right:auto;
+          width:960px;
+        }
       </style>
   </head>
-  <body>
-    <h1>Project 2: Endorsements</h1>
-    <h2>Stephanie Doctor</h2>
-    <br/>
+  
+  <body id="page-top" class="index">
 
-    <!-- <svg> -->
-      <!-- <defs> -->
-        <!-- <mask id='circle-mask'> -->
-          <!-- <g id='ccc'> -->
-            <!-- <circle r=6></circle> -->
-          <!-- </g> -->
-        <!-- </mask> -->
-        <!-- <rect id='dem' width=6 height=6 mask='#circle-mask' fill='blue'></rect> -->
-      <!-- </defs> -->
-    <!-- </svg> -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">Storytelling Projects</a>
+            </div>
 
-    <div id="chart-1">
-      <p align='center'><!-- 
-        <label for="slider" style="display: inline-block; width: 240px; text-align: right">
-           year = <span id="slider-value">2000</span>
-        </label>
-        <input type="range" id='slider' min="1980" max="2016" step='4' defaultValue='2000'> -->
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+<!--                     <li class="page-scroll">
+                        <a href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">About</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Contact</a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    
+    <section>
+      <h1>Project 2: Endorsements</h1>
+      <br/>
 
-        <input id="slider" type="text" data-slider-ticks="[1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["1980", "1984", "1988", "1992", "1996", "2000", "2004", "2008", "2012", "2016"]'/>        
+      <!-- <svg> -->
+        <!-- <defs> -->
+          <!-- <mask id='circle-mask'> -->
+            <!-- <g id='ccc'> -->
+              <!-- <circle r=6></circle> -->
+            <!-- </g> -->
+          <!-- </mask> -->
+          <!-- <rect id='dem' width=6 height=6 mask='#circle-mask' fill='blue'></rect> -->
+        <!-- </defs> -->
+      <!-- </svg> -->
 
-      </p>
-    </div>
+      <div id="chart-1">
+        <p align='center'><!-- 
+          <label for="slider" style="display: inline-block; width: 240px; text-align: right">
+             year = <span id="slider-value">2000</span>
+          </label>
+          <input type="range" id='slider' min="1980" max="2016" step='4' defaultValue='2000'> -->
+
+          <input id="slider" type="text" data-slider-ticks="[1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016]" data-slider-ticks-snap-bounds="30" data-slider-ticks-labels='["1980", "1984", "1988", "1992", "1996", "2000", "2004", "2008", "2012", "2016"]'/>        
+
+        </p>
+      </div>
+    </section>
 
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
