@@ -206,6 +206,8 @@ section.success {
   position: relative;
   max-width: 400px;
   margin: 0 auto;
+  outline:#2C3E50 solid 4px;
+  max-height: 400px;
 }
 #portfolio .portfolio-item .portfolio-link .caption {
   background: rgba(24, 188, 156, 0.9);
@@ -226,7 +228,7 @@ section.success {
   height: 20px;
   font-size: 20px;
   text-align: center;
-  top: 50%;
+  top: 40%;
   margin-top: -12px;
   color: white;
 }
@@ -236,6 +238,9 @@ section.success {
 #portfolio .portfolio-item .portfolio-link .caption .caption-content h3,
 #portfolio .portfolio-item .portfolio-link .caption .caption-content h4 {
   margin: 0;
+  padding-bottom: 20px;
+  /*position: absolute;*/
+  /*height: 50px;*/
 }
 #portfolio * {
   z-index: 2;

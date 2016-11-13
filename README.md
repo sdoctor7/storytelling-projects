@@ -1,1 +1,1 @@
-blah!
+This is a portfolio of my projects for Storytelling with Data in Fall 2016.

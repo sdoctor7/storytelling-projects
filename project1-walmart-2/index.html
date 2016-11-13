@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+  <head>
+      <meta charset="utf-8">
+
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <link href="https://fonts.googleapis.com/css?family=Roboto+Slab" rel="stylesheet">
+
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+      <meta name="author" content="">
+
+      <title>Project 1 - Walmart</title>
+
+      <!-- Bootstrap Core CSS -->
+      <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+      <!-- Theme CSS -->
+      <link href="../css/freelancer.min.css" rel="stylesheet">
+
+      <!-- Custom Fonts -->
+      <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+      <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css"> 
+
+      <style>
+      /*h1, h2, h3, h4, h5, h6 {
+        font-family: "Roboto Slab", serif;
+      }
+      body {
+        font-family: "Helvetica Neue";
+        font-weight: 300;
+        margin-left:auto;
+        margin-right:auto;
+        width:960px;
+      }
+      svg { background: #f9f9f9; }*/
+
+        .axis path,
+        .axis line {
+          fill: none;
+          stroke: none;
+          shape-rendering: crispEdges;
+        }
+        .axis text {
+          font-family: sans-serif;
+          font-size: 12px;
+        }
+        .label text {
+          font-family: sans-serif;
+          font-size: 14px;
+        }
+        .d3-tip {
+          line-height: 1;
+          font-weight: bold;
+          padding: 12px;
+          background: rgba(0, 0, 0, 0.8);
+          color: #fff;
+          border-radius: 2px;
+        }
+        section{
+          margin-left:auto;
+          margin-right:auto;
+          width:960px;
+        }
+        #products-display {
+          width: 195px;
+        }
+      </style>
+
+
+  </head>
+  
+  <body id="page-top" class="index">
+
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top navbar-custom">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="#page-top">Storytelling Projects</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="hidden">
+                        <a href="#page-top"></a>
+                    </li>
+<!--                     <li class="page-scroll">
+                        <a href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#about">About</a>
+                    </li>
+                    <li class="page-scroll">
+                        <a href="#contact">Contact</a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+    <section>
+      <h1 align="center">Walmart Confusion Matrix</h1>
+        <div align="center" id="heatmap" text-align='center'>
+          <!-- <div style="display: inline-block; text-align: left" id='products-display'>
+          <strong>Most Popular Product:</strong>
+          <span id='popular-product'></span> -->
+          <!-- <br/> -->
+          <!-- <strong>&emsp;&emsp;Predicted Product:</strong>
+          <span id='predicted-product'></span> -->
+          <!-- <br/> -->
+          <!-- <strong>&emsp;&emsp;Frequency:</strong>
+          <span id='frequency'></span> -->
+
+          <div class='col-lg-1'></div>
+          <div class='col-lg-3' text-align='center'>
+            <strong>Most Popular Product:</strong>
+            <span id='popular-product'></span>
+          </div>
+          <div class='col-lg-4' text-align='center'>
+            <strong>&emsp;&emsp;Predicted Product:</strong>
+            <span id='predicted-product'></span>
+          </div>
+          <div class='col-lg-4' text-align='center'>
+            <strong>&emsp;&emsp;Frequency:</strong>
+            <span id='frequency'></span>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- <div id="heatmap"></div> -->
+    </section>
+
+    <!-- jQuery -->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <!-- <script src="js/jqBootstrapValidation.js"></script> -->
+    <!-- <script src="js/contact_me.js"></script> -->
+
+    <!-- Theme JavaScript -->
+    <script src="../js/freelancer.min.js"></script>
+
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+
+    <!-- This is D3, our graphing library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.2/d3.min.js"></script>
+
+    <!-- This is the tool tip -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+
+    <!-- Now we include our actual visualization -->
+    <script src="walmart_heatmap.js"></script>
+
+  </body>
+</html>
