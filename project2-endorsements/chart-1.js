@@ -22,61 +22,13 @@
     .range([0, (width-margin.right)])
     .clamp(true); //??????
 
-  svg.append('defs').append('clipPath').attr('id', 'circle-clip').append('circle').attr('r', 6).attr('transform', 'translate(6,6)')
+  var radiusScale = d3.scaleSqrt().range([3,20])
 
-  demDef = svg.selectAll('defs').append("g").attr("id","dem")
-  demDef.append('rect').attr('width', 12).attr('height', 12).attr('fill', 'blue').attr('clip-path', 'url(#circle-clip)')
-  demDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
-
-  demRepDef = svg.selectAll('defs').append("g").attr("id","dem-rep").attr('clip-path', 'url(#circle-clip)')
-  demRepDef.append('rect').attr('width', 6).attr('height', 12).attr('fill', 'blue')
-  demRepDef.append('rect').attr('width', 6).attr('height', 12).attr('fill', 'red').attr('transform', 'translate(6,0)')
-  demRepDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
-
-  noneDef = svg.selectAll('defs').append("g").attr("id","none")
-  noneDef.append('rect').attr('width', 12).attr('height', 12).attr('fill', 'white').attr('clip-path', 'url(#circle-clip)')
-  noneDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
-
-  noneDemDef = svg.selectAll('defs').append("g").attr("id","none-dem").attr('clip-path', 'url(#circle-clip)')
-  noneDemDef.append('rect').attr('width', 6).attr('height', 12).attr('fill', 'white')
-  noneDemDef.append('rect').attr('width', 6).attr('height', 12).attr('fill', 'blue')
-  noneDemDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
-
-  repDef = svg.selectAll('defs').append("g").attr("id","rep")
-  repDef.append('rect').attr('width', 12).attr('height', 12).attr('fill', 'red').attr('clip-path', 'url(#circle-clip)')
-  repDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
-
-  unkDef = svg.selectAll('defs').append("g").attr("id","unk")
-  unkDef.append('rect').attr('width', 12).attr('height', 12).attr('fill', 'gray').attr('clip-path', 'url(#circle-clip)')
-  unkDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
-
-  unkDemDef = svg.selectAll('defs').append("g").attr("id","unk-dem").attr('clip-path', 'url(#circle-clip)')
-  unkDemDef.append('rect').attr('width', 6).attr('height', 12).attr('fill', 'gray')
-  unkDemDef.append('rect').attr('width', 6).attr('height', 12).attr('fill', 'blue')
-  unkDemDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
-
-  unkNoneDef = svg.selectAll('defs').append("g").attr("id","unk-none").attr('clip-path', 'url(#circle-clip)')
-  unkNoneDef.append('rect').attr('width', 6).attr('height', 12).attr('fill', 'gray')
-  unkNoneDef.append('rect').attr('width', 6).attr('height', 12).attr('fill', 'white')
-  unkNoneDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
-
-  unkRepDef = svg.selectAll('defs').append("g").attr("id","unk-rep").attr('clip-path', 'url(#circle-clip)')
-  unkRepDef.append('rect').attr('width', 6).attr('height', 12).attr('fill', 'gray')
-  unkRepDef.append('rect').attr('width', 6).attr('height', 12).attr('fill', 'red')
-  unkRepDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
-
-  othDef = svg.selectAll('defs').append("g").attr("id","oth")
-  othDef.append('rect').attr('width', 12).attr('height', 12).attr('fill', 'yellow').attr('clip-path', 'url(#circle-clip)')
-  othDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
-
-  demOthDef = svg.selectAll('defs').append("g").attr("id","dem-oth").attr('clip-path', 'url(#circle-clip)')
-  demOthDef.append('rect').attr('width', 12).attr('height', 12).attr('fill', 'blue')
-  demOthDef.append('rect').attr('width', 12).attr('height', 12).attr('fill', 'yellow')
-  demOthDef.append('circle').attr('r', 6).attr('fill', 'none').attr('stroke', 'black').attr('stroke-width', '1px').attr('transform', 'translate(6,6)')
+  var defs = svg.append('defs')
 
   var fillScale = d3.scaleOrdinal()
     .domain(['Democrat', 'Democrat/Republican', 'None', 'None/Democrat', 'Republican', 'Unknown', 'Unknown/Democrat', 'Unknown/None', 'Unknown/Republican', 'Other', 'Democrat/Other'])
-    .range(['#dem', '#dem-rep', '#none', '#none-dem', '#rep', '#unk', '#unk-dem', '#unk-none', '#unk-rep', '#oth', '#dem-oth'])
+    .range(['dem', 'dem-rep', 'none', 'none-dem', 'rep', 'unk', 'unk-dem', 'unk-none', 'unk-rep', 'oth', 'dem-oth'])
     
   d3.json('us-states.json', function(json) {
     svg.selectAll("path")
@@ -93,19 +45,106 @@
     .defer(d3.csv, "endorsements.csv", function (d) {
       d.Latitude = +d.Latitude
       d.Longitude = +d.Longitude
+      d.Circulation = d.Circulation.replace (/,/g, "")
+      d.Circulation = +d.Circulation
       return d
     })
     .await(ready)
 
   function ready(error, datapoints) {
 
-    svg.selectAll('use')
-      .data(datapoints)
-      .enter().append('use')
-      .attr('xlink:href', function(d) {return fillScale(d.Party)})
-      .attr("x", function(d) {return projection([d.Longitude, d.Latitude])[0]})
-      .attr("y", function(d) {return projection([d.Longitude, d.Latitude])[1];})
-      .attr('transform', 'translate(-6,-6)')
+    radiusScale.domain([0,d3.max(datapoints, function(d) {return d.Circulation})])
+
+    var sorted = datapoints.sort(function(a, b) { 
+      return b.Circulation - a.Circulation; 
+    });
+
+    defs.append('pattern').attr('id', 'dem')
+      .attr('height', '100%').attr('width', '100%')
+      .attr('patternContentUnits', 'objectBoundingBox')
+      .append('rect').attr('width', 12).attr('height', 12).attr('fill', 'blue')
+      .attr('preserveAspectRatio', 'none')
+
+    var demrep = defs.append('linearGradient').attr('id', 'dem-rep')
+      .attr('x1', '0%').attr('y1', '0%').attr('x2', '100%').attr('y2', '0%')
+    demrep.append('stop').attr('offset', '0%').attr('stop-color', 'blue').attr('stop-opacity', 1)
+    demrep.append('stop').attr('offset', '50%').attr('stop-color', 'blue').attr('stop-opacity', 1)
+    demrep.append('stop').attr('offset', '50%').attr('stop-color', 'red').attr('stop-opacity', 1)
+    demrep.append('stop').attr('offset', '100%').attr('stop-color', 'red').attr('stop-opacity', 1)
+
+    defs.append('pattern').attr('id', 'none')
+      .attr('height', '100%').attr('width', '100%')
+      .attr('patternContentUnits', 'objectBoundingBox')
+      .append('rect').attr('width', 12).attr('height', 12).attr('fill', 'white')
+
+    var nonedem = defs.append('linearGradient').attr('id', 'none-dem')
+      .attr('x1', '0%').attr('y1', '0%').attr('x2', '100%').attr('y2', '0%')
+    nonedem.append('stop').attr('offset', '0%').attr('stop-color', 'white').attr('stop-opacity', 1)
+    nonedem.append('stop').attr('offset', '50%').attr('stop-color', 'white').attr('stop-opacity', 1)
+    nonedem.append('stop').attr('offset', '50%').attr('stop-color', 'blue').attr('stop-opacity', 1)
+    nonedem.append('stop').attr('offset', '100%').attr('stop-color', 'blue').attr('stop-opacity', 1)
+
+    defs.append('pattern').attr('id', 'rep')
+      .attr('height', '100%').attr('width', '100%')
+      .attr('patternContentUnits', 'objectBoundingBox')
+      .append('rect').attr('width', 12).attr('height', 12).attr('fill', 'red')
+
+    defs.append('pattern').attr('id', 'unk')
+      .attr('height', '100%').attr('width', '100%')
+      .attr('patternContentUnits', 'objectBoundingBox')
+      .append('rect').attr('width', 12).attr('height', 12).attr('fill', 'gray')
+
+    var unkdem = defs.append('linearGradient').attr('id', 'unk-dem')
+      .attr('x1', '0%').attr('y1', '0%').attr('x2', '100%').attr('y2', '0%')
+    unkdem.append('stop').attr('offset', '0%').attr('stop-color', 'gray').attr('stop-opacity', 1)
+    unkdem.append('stop').attr('offset', '50%').attr('stop-color', 'gray').attr('stop-opacity', 1)
+    unkdem.append('stop').attr('offset', '50%').attr('stop-color', 'blue').attr('stop-opacity', 1)
+    unkdem.append('stop').attr('offset', '100%').attr('stop-color', 'blue').attr('stop-opacity', 1)
+
+    var unknone = defs.append('linearGradient').attr('id', 'unk-none')
+      .attr('x1', '0%').attr('y1', '0%').attr('x2', '100%').attr('y2', '0%')
+    unknone.append('stop').attr('offset', '0%').attr('stop-color', 'gray').attr('stop-opacity', 1)
+    unknone.append('stop').attr('offset', '50%').attr('stop-color', 'gray').attr('stop-opacity', 1)
+    unknone.append('stop').attr('offset', '50%').attr('stop-color', 'white').attr('stop-opacity', 1)
+    unknone.append('stop').attr('offset', '100%').attr('stop-color', 'white').attr('stop-opacity', 1)
+
+    var unkrep = defs.append('linearGradient').attr('id', 'unk-rep')
+      .attr('x1', '0%').attr('y1', '0%').attr('x2', '100%').attr('y2', '0%')
+    unkrep.append('stop').attr('offset', '0%').attr('stop-color', 'gray').attr('stop-opacity', 1)
+    unkrep.append('stop').attr('offset', '50%').attr('stop-color', 'gray').attr('stop-opacity', 1)
+    unkrep.append('stop').attr('offset', '50%').attr('stop-color', 'red').attr('stop-opacity', 1)
+    unkrep.append('stop').attr('offset', '100%').attr('stop-color', 'red').attr('stop-opacity', 1)
+
+    defs.append('pattern').attr('id', 'oth')
+      .attr('height', '100%').attr('width', '100%')
+      .attr('patternContentUnits', 'objectBoundingBox')
+      .append('rect').attr('width', 6).attr('height', 12).attr('fill', 'yellow')
+
+    var demoth = defs.append('linearGradient').attr('id', 'dem-oth')
+      .attr('x1', '0%').attr('y1', '0%').attr('x2', '100%').attr('y2', '0%')
+    demoth.append('stop').attr('offset', '0%').attr('stop-color', 'blue').attr('stop-opacity', 1)
+    demoth.append('stop').attr('offset', '50%').attr('stop-color', 'blue').attr('stop-opacity', 1)
+    demoth.append('stop').attr('offset', '50%').attr('stop-color', 'yellow').attr('stop-opacity', 1)
+    demoth.append('stop').attr('offset', '100%').attr('stop-color', 'yellow').attr('stop-opacity', 1)
+
+    svg.selectAll('.endorsement-circle')
+      .data(sorted)
+      .enter().append('circle')
+      .attr('class', 'endorsement-circle')
+      .attr('r', function(d) {
+        return radiusScale(d.Circulation)
+      })
+      .attr('fill', function(d) {
+        return 'url(#' + fillScale(d.Party) + ')'
+      })
+      .attr('cx', function(d) {return projection([d.Longitude, d.Latitude])[0]})
+      .attr('cy', function(d) {return projection([d.Longitude, d.Latitude])[1]})
+      .attr('stroke', 'black')
+      .attr('stroke-width', '0.5px')
+      .attr('opacity', function(d) {
+        if (+d.year == 1980) {return 1}
+        else {return 0}
+      })
 
     var mySlider = $("#slider").slider({
       ticks: [1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016],
@@ -115,7 +154,7 @@
 
     mySlider.on('slide', function(d){
       var value = mySlider.slider('getValue');
-      svg.selectAll("use")
+      svg.selectAll(".endorsement-circle")
         .attr('opacity', function(d) {
           if (+d.year == +value) {return 1}
           else {return 0}
