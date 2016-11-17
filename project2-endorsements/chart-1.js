@@ -11,7 +11,7 @@
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   var projection = d3.geoAlbersUsa()
-    .translate([width/2, height/2])
+    .translate([width/2-100, height/2])
     .scale([1000]);
 
   var path = d3.geoPath()
@@ -22,14 +22,23 @@
     .range([0, (width-margin.right)])
     .clamp(true); //??????
 
-  var radiusScale = d3.scaleSqrt().range([3,20])
+  var radiusScale = d3.scaleSqrt().range([3,8,30])
 
   var defs = svg.append('defs')
 
   var fillScale = d3.scaleOrdinal()
     .domain(['Democrat', 'Democrat/Republican', 'None', 'None/Democrat', 'Republican', 'Unknown', 'Unknown/Democrat', 'Unknown/None', 'Unknown/Republican', 'Other', 'Democrat/Other'])
     .range(['dem', 'dem-rep', 'none', 'none-dem', 'rep', 'unk', 'unk-dem', 'unk-none', 'unk-rep', 'oth', 'dem-oth'])
-    
+  
+  var tip = d3.tip() // this is you building your tooltip
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function(d) {
+      return "<b>Newspaper: </b> <span>" + d.publication + "</span> </br> <b>Candidate Endorsed: </b> <span>" + d.endorsed + "</span>";
+    })
+
+  svg.call(tip);
+
   d3.json('us-states.json', function(json) {
     svg.selectAll("path")
       .data(json.features)
@@ -53,7 +62,7 @@
 
   function ready(error, datapoints) {
 
-    radiusScale.domain([0,d3.max(datapoints, function(d) {return d.Circulation})])
+    radiusScale.domain([0, 65000, d3.max(datapoints, function(d) {return d.Circulation})])
 
     var sorted = datapoints.sort(function(a, b) { 
       return b.Circulation - a.Circulation; 
@@ -131,9 +140,6 @@
       .data(sorted)
       .enter().append('circle')
       .attr('class', 'endorsement-circle')
-      .attr('r', function(d) {
-        return radiusScale(d.Circulation)
-      })
       .attr('fill', function(d) {
         return 'url(#' + fillScale(d.Party) + ')'
       })
@@ -141,25 +147,112 @@
       .attr('cy', function(d) {return projection([d.Longitude, d.Latitude])[1]})
       .attr('stroke', 'black')
       .attr('stroke-width', '0.5px')
-      .attr('opacity', function(d) {
-        if (+d.year == 1980) {return 1}
+      .attr('r', function(d) {
+        if (+d.year == 1980) {return radiusScale(d.Circulation)}
         else {return 0}
       })
+      .on('mouseover', tip.show)
+      .on('mouseout', tip.hide)
 
     var mySlider = $("#slider").slider({
       ticks: [1980, 1984, 1988, 1992, 1996, 2000, 2004, 2008, 2012, 2016],
       ticks_labels: ["1980", "1984", "1988", "1992", "1996", "2000", "2004", "2008", "2012", "2016"],
-      ticks_snap_bounds: 4
+      ticks_snap_bounds: 2
     });
 
     mySlider.on('slide', function(d){
       var value = mySlider.slider('getValue');
       svg.selectAll(".endorsement-circle")
-        .attr('opacity', function(d) {
-          if (+d.year == +value) {return 1}
+        .attr('r', function(d) {
+          if (+d.year == +value) {return radiusScale(d.Circulation)}
           else {return 0}
         })
     });
+
+    var legend_circ = svg.append('g')
+    legend_circ.append('rect')
+      .attr('stroke', 'black').attr('fill', 'none').attr('stroke-width', '0.5px')
+      .attr('width', 200).attr('height', 190)
+      .attr('x', 685).attr('y', 115)
+    legend_circ.append('text')
+      .text('CIRCULATION')
+      .attr('x', 785).attr('y', 135)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '18px')
+    legend_circ.append('circle')
+      .attr('cx', 720).attr('cy', 160)
+      .attr('r', radiusScale(0))
+      .attr('stroke', 'black').attr('fill', 'none').attr('stroke-width', '0.5px')
+    legend_circ.append('text')
+      .text('No Circulation Data')
+      .attr('x', 750).attr('y', 165)
+    legend_circ.append('circle')
+      .attr('cx', 720).attr('cy', 185)
+      .attr('r', radiusScale(100000))
+      .attr('stroke', 'black').attr('fill', 'none').attr('stroke-width', '0.5px')
+    legend_circ.append('text')
+      .text('100,000')
+      .attr('x', 750).attr('y', 190)
+    legend_circ.append('circle')
+      .attr('cx', 720).attr('cy', 225)
+      .attr('r', radiusScale(500000))
+      .attr('stroke', 'black').attr('fill', 'none').attr('stroke-width', '0.5px')
+    legend_circ.append('text')
+      .text('500,000')
+      .attr('x', 750).attr('y', 230)
+    legend_circ.append('circle')
+      .attr('cx', 720).attr('cy', 275)
+      .attr('r', radiusScale(1000000))
+      .attr('stroke', 'black').attr('fill', 'none').attr('stroke-width', '0.5px')
+    legend_circ.append('text')
+      .text('1,000,000')
+      .attr('x', 750).attr('y', 280)
+
+    var legend_end = svg.append('g')
+    legend_end.append('rect')
+      .attr('stroke', 'black').attr('fill', 'none').attr('stroke-width', '0.5px')
+      .attr('width', 200).attr('height', 145)
+      .attr('x', 685).attr('y', 315)
+    legend_end.append('text')
+      .text('ENDORSEMENT')
+      .attr('x', 785).attr('y', 335)
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '18px')
+    legend_end.append('circle')
+      .attr('cx', 720).attr('cy', 360)
+      .attr('r', 7)
+      .attr('stroke', 'black').attr('fill', 'blue').attr('stroke-width', '0.5px')
+    legend_end.append('text')
+      .text('Democrat')
+      .attr('x', 750).attr('y', 365)
+    legend_end.append('circle')
+      .attr('cx', 720).attr('cy', 380)
+      .attr('r', 7)
+      .attr('stroke', 'black').attr('fill', 'red').attr('stroke-width', '0.5px')
+    legend_end.append('text')
+      .text('Republican')
+      .attr('x', 750).attr('y', 385)
+    legend_end.append('circle')
+      .attr('cx', 720).attr('cy', 400)
+      .attr('r', 7)
+      .attr('stroke', 'black').attr('fill', 'yellow').attr('stroke-width', '0.5px')
+    legend_end.append('text')
+      .text('Other Party')
+      .attr('x', 750).attr('y', 405)
+    legend_end.append('circle')
+      .attr('cx', 720).attr('cy', 420)
+      .attr('r', 7)
+      .attr('stroke', 'black').attr('fill', 'white').attr('stroke-width', '0.5px')
+    legend_end.append('text')
+      .text('None')
+      .attr('x', 750).attr('y', 425)
+    legend_end.append('circle')
+      .attr('cx', 720).attr('cy', 440)
+      .attr('r', 7)
+      .attr('stroke', 'black').attr('fill', 'gray').attr('stroke-width', '0.5px')
+    legend_end.append('text')
+      .text('Unknown')
+      .attr('x', 750).attr('y', 445)
 
   }
 

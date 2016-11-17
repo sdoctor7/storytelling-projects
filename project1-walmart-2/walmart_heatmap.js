@@ -13,10 +13,8 @@
 	var xPositionScale = d3.scalePoint().range([10, width]).padding(1);
 	var yPositionScale = d3.scalePoint().range([0, height-10]).padding(1);
 	var colorScale = d3.scaleLinear().range(['#fffcf7', '#f7eda3', 'red'])
-	// var colorScale = d3.scaleLinear().range(['#efefed', 'white', 'red'])
 
 	d3.queue()
-		// .defer(d3.csv, "conf_matrix_melt_10.6.csv")
 		.defer(d3.csv, "conf_matrix_melt_10.25.csv", function(d) {
 			d.Frequency = +d.Frequency
 			return d
@@ -71,14 +69,8 @@
 			.on('mouseout', function(d) {
 				d3.select(this)
 				d3.selectAll('#predicted-product')
-					// .transition(800)
-					// .style('display', 'none')
-					// .text('00')
 					.style('color', 'white')
 				d3.selectAll('#popular-product')
-					// .transition(800)
-					// .style('display', 'none')
-					// .text('00')
 					.style('color', 'white')
 				d3.selectAll('#frequency')
 					.style('color', 'white')
@@ -87,21 +79,22 @@
 		var xAxis = d3.axisBottom(xPositionScale)
 		var xAxisHeight = height-15;
 		var xLabelHeight = height+25;
-    svg.append("g")
-      .attr("class", "axis x-axis")
-      .attr("transform", "translate(8," + xAxisHeight + ")")
-      .call(xAxis);
+    
+    	svg.append("g")
+    		.attr("class", "axis x-axis")
+    		.attr("transform", "translate(8," + xAxisHeight + ")")
+    		.call(xAxis);
 
 		svg.append('text')
 			.attr("text-anchor", "middle")
 			.attr("transform", "translate(" + width/2 + "," + xLabelHeight + ")")
 			.text("Predicted Product");
 
-    var yAxis = d3.axisLeft(yPositionScale);
-    svg.append("g")
-      .attr("class", "axis y-axis")
-			.attr("transform", "translate(30,8)")
-      .call(yAxis);
+    	var yAxis = d3.axisLeft(yPositionScale);
+    	svg.append("g")
+	    	.attr("class", "axis y-axis")
+	    	.attr("transform", "translate(30,8)")
+	    	.call(yAxis);
 
 		svg.append('text')
 			.attr("text-anchor", "middle")
